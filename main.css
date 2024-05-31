@@ -113,3 +113,9 @@ nav.main-nav a:hover {
     font-weight: bold;
     color: #333;
 }
+.video-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
