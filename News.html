@@ -8,14 +8,20 @@
     <link rel="shortcut icon" href="pngegg.png" type="image/x-icon">
     <script>
         function toggleNews(id) {
+            // Находим элемент в документе с указанным id и сохраняем его в переменную element.
             var element = document.getElementById(id);
+            
+            // Проверяем текущее значение свойства display у найденного элемента.
             if (element.style.display === "none") {
+                // Если значение display равно "none", то изменяем его на "block", делая элемент видимым.
                 element.style.display = "block";
             } else {
+                // В противном случае, изменяем значение display на "none", скрывая элемент.
                 element.style.display = "none";
             }
         }
     </script>
+    
 </head>
 <body>
     <header>

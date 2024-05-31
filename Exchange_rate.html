@@ -7,24 +7,33 @@
     <link rel="stylesheet" href="main.css">
     <link rel="shortcut icon" href="pngegg.png" type="image/x-icon">
     <script>
+        //Инициализация переменных
         let inrRate = 0;
         let inrNominal = 0;
-
         fetch('https://www.cbr-xml-daily.ru/daily_json.js')
+            //Обработка ответа
             .then(response => response.json())
+            //Извлечение данных
             .then(data => {
+                // Сохраняем значение курса индийской рупии
                 inrRate = data.Valute.INR.Value;
+                // Сохраняем значение номинала индийской рупии.
                 inrNominal = data.Valute.INR.Nominal;
+                // Обновляем элемент с ID 'exchangeRate', чтобы отобразить текущий курс рупии к рублю.
                 document.getElementById('exchangeRate').textContent = (inrRate / inrNominal).toFixed(4);
             });
 
         function convertToInr() {
+            // Получаем значение, введенное пользователем в поле с ID 'rubAmount'.
             const rubAmount = parseFloat(document.getElementById('rubAmount').value);
+            // Проверяем, является ли введенное значение числом и больше ли оно нуля.
             if (isNaN(rubAmount) || rubAmount <= 0) {
                 document.getElementById('inrAmount').textContent = "Введите корректное количество рублей.";
                 return;
             }
+            // Рассчитываем сумму в индийских рупиях, деля сумму в рублях на курс рупии.
             const inrAmount = (rubAmount / (inrRate / inrNominal)).toFixed(2);
+            // Обновляем элемент с ID 'inrAmount', чтобы отобразить рассчитанную сумму в рупиях.
             document.getElementById('inrAmount').textContent = inrAmount;
         }
 
