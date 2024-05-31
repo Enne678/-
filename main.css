@@ -43,6 +43,18 @@ h1 {
     color: #008000;
 }
 
+h2, h3 {
+    color: #333;
+}
+
+.news-card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
 .full-news {
     display: none;
 }
@@ -70,4 +82,34 @@ nav.main-nav a {
 
 nav.main-nav a:hover {
     background-color: #ddd;
+}
+.conversion-block {
+    margin-bottom: 20px;
+}
+
+.input-field {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 15px;
+    margin: 10px 0;
+}
+
+.btn {
+    padding: 10px;
+    background-color: #008000;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.btn:hover {
+    background-color: #006400;
+}
+
+.result {
+    font-weight: bold;
+    color: #333;
 }

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Курс валют - АО "СЭБ Банк"</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="shortcut icon" href="pngegg.png" type="image/x-icon">
+    <script>
+        let inrRate = 0;
+        let inrNominal = 0;
+
+        fetch('https://www.cbr-xml-daily.ru/daily_json.js')
+            .then(response => response.json())
+            .then(data => {
+                inrRate = data.Valute.INR.Value;
+                inrNominal = data.Valute.INR.Nominal;
+                document.getElementById('exchangeRate').textContent = (inrRate / inrNominal).toFixed(4);
+            });
+
+        function convertToInr() {
+            const rubAmount = parseFloat(document.getElementById('rubAmount').value);
+            if (isNaN(rubAmount) || rubAmount <= 0) {
+                document.getElementById('inrAmount').textContent = "Введите корректное количество рублей.";
+                return;
+            }
+            const inrAmount = (rubAmount / (inrRate / inrNominal)).toFixed(2);
+            document.getElementById('inrAmount').textContent = inrAmount;
+        }
+
+        function convertToRub() {
+            const inrAmount = parseFloat(document.getElementById('inrAmountInput').value);
+            if (isNaN(inrAmount) || inrAmount <= 0) {
+                document.getElementById('rubAmountResult').textContent = "Введите корректное количество рупий.";
+                return;
+            }
+            const rubAmount = (inrAmount * (inrRate / inrNominal)).toFixed(2);
+            document.getElementById('rubAmountResult').textContent = rubAmount;
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <img src="https://seb.ru/upload/CAllcorp3/5f9/vufzk4krng60fywz9kueg8wdz5u4drls.png" alt="Логотип СЭБ Банк" class="logo">
+        </div>
+    </header>
+    <nav class="main-nav">
+        <a href="About_the_company.html">О компании</a>
+        <a href="News.html">Новости</a>
+        <a href="Exchange_rate.html">Курс валют</a>
+        <a href="Contact_details.html">Контактные данные</a>
+        <a href="Video.html">Видео</a>
+    </nav>
+    <div class="content">
+        <h1>Курс валют</h1>
+        <p>Текущие курсы валют, предоставляемые АО "СЭБ Банк".</p>
+        <p>Актуальный курс на сегодня: <span id="exchangeRate"></span> INR за 1 RUB.</p>
+
+        <div class="conversion-block">
+            <label for="rubAmount">Введите количество рублей:</label>
+            <input type="number" id="rubAmount" class="input-field">
+            <button onclick="convertToInr()" class="btn">Перевести в INR</button>
+            <p>Результат: <span id="inrAmount" class="result"></span> индийских рупий</p>
+        </div>
+
+        <div class="conversion-block">
+            <label for="inrAmountInput">Введите количество индийских рупий:</label>
+            <input type="number" id="inrAmountInput" class="input-field">
+            <button onclick="convertToRub()" class="btn">Перевести в RUB</button>
+            <p>Результат: <span id="rubAmountResult" class="result"></span> рублей</p>
+        </div>
+    </div>
+</body>
+</html>
